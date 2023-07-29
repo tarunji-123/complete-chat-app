@@ -28,8 +28,10 @@ async function addForm(e){
         }else{
             throw new Error('Failed to login');
         }
+        form.reset();
 
     }catch(err){
         console.log(err);
+        document.body.innerHTML +=`<div style='color:red'>${err}<div>`;
     }
 }
