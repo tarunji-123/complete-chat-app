@@ -24,8 +24,10 @@ async function addForm(e){
         let response = await axios.post('http://localhost:3000/user/signup',formDetails);
         console.log("hello");
         if(response.status == 201){
+            alert(response.data.message);
             window.location.href = "../login/login.html"
-        }else{
+        }else {
+            alert(response.data.message);
             throw new Error('Failed to login');
         }
         form.reset();
