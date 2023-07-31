@@ -17,24 +17,24 @@ exports.signup = async(req,res,next)=>{
     
     const {name, email, password } = req.body;
     console.log("email ==> ", email);
-
-    const user = await User.findAll({where :{email : email}})
-    if(user == email){
-        console.log("email id is present");
-        return res.status(200).json({message : "email id is already present, Please Login"});
-    }
     
-
     if(isstringInvalid(name) || isstringInvalid(email) || isstringInvalid(password)){
         return res.status(400).json({
             message : "Bad parameters, Something is missing"
         })
     }
+
+    const user = await User.fineOne({where :{email : email}})
+    if(user ){
+        console.log("email id is present");
+        return res.status(200).json({message : "email id is already present, Please Login"});
+    }
+    
     const saltrounds = 10;
     bcrypt.hash(password,saltrounds,async(err,hash)=>{
         // console.log(err);
-        await User.create({name, email, password:hash})
-        res.status(201).json({message : 'Successfully create new user'});
+        const result = await User.create({name, email, password:hash})
+        res.status(201).json({userInfo : result,message : 'Successfully create new user'});
     })
     
     }catch(err){

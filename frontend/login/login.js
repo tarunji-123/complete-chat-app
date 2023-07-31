@@ -23,6 +23,8 @@ async function submitForm(e){
 
             localStorage.setItem('token',response.data.token);
             console.log("great work");
+
+            window.location.href = "../chatapp/chat.html"
             
         }
         else{
