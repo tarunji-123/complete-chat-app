@@ -17,14 +17,15 @@ exports.signup = async(req,res,next)=>{
     
     const {name, email, password } = req.body;
     console.log("email ==> ", email);
-    
+    console.log("hii");
     if(isstringInvalid(name) || isstringInvalid(email) || isstringInvalid(password)){
         return res.status(400).json({
             message : "Bad parameters, Something is missing"
         })
     }
 
-    const user = await User.fineOne({where :{email : email}})
+    const user = await User.findOne({where :{email : email}})
+    console.log(user,"user");
     if(user ){
         console.log("email id is present");
         return res.status(200).json({message : "email id is already present, Please Login"});

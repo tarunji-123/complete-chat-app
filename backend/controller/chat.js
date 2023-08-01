@@ -5,8 +5,37 @@ exports.chatPost = async(req, res)=>{
     const message=req.body.message
     console.log(message, "message==");
     try{
-        const userMessage = await Chat.create({message, userId :req.user.id})
-        res.status(200).json({userMessage});
+        const chat = await Chat.create({message, username: req.user.name});
+        res.status(200).json({chat});
+    }
+    catch(err){
+        console.log(err);
+    }
+}
+
+exports.allChats = async(req,res)=>{
+    try{
+        const chats = await Chat.findAll();
+        console.log(chats);
+        if(chats){
+            res.status(200).json(chats);
+        }else{
+            res.status(404).json({
+                'success':'false'
+            })
+        }
+    }
+    catch(error){
+        res.status(404).json({
+            'success':'false'
+        })
+    }
+}
+
+exports.getAllUser = async(req,res, next)=>{
+    try{
+        const user = await User.findAll({attributes:['name']});
+        res.status(200).json({user});
     }
     catch(err){
         console.log(err);

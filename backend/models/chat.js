@@ -2,11 +2,9 @@ const Sequelize = require('sequelize');
 const sequelize = require('../util/database');
 
 const chatDetails = sequelize.define('chat',{
-    id:{
-        type: Sequelize.INTEGER,
-        autoIncrement: true,
+    username:{
+        type : Sequelize.STRING,
         allowNull : false,
-        primaryKey : true
     },
     message:{
         type : Sequelize.STRING,
