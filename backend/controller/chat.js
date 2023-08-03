@@ -5,7 +5,7 @@ exports.chatPost = async(req, res)=>{
     const message=req.body.message
     console.log(message, "message==");
     try{
-        const chat = await Chat.create({message, username: req.user.name});
+        const chat = await Chat.create({message, username: req.user.name, userId : req.user.id});
         res.status(200).json({chat});
     }
     catch(err){
@@ -32,12 +32,3 @@ exports.allChats = async(req,res)=>{
     }
 }
 
-exports.getAllUser = async(req,res, next)=>{
-    try{
-        const user = await User.findAll({attributes:['name']});
-        res.status(200).json({user});
-    }
-    catch(err){
-        console.log(err);
-    }
-}

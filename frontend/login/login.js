@@ -1,5 +1,4 @@
 var form = document.getElementById('my-form');
-console.log(form);
 var emailInput = document.getElementById('email');
 var passwordInput = document.getElementById('password');
 
@@ -23,15 +22,6 @@ async function submitForm(e){
 
             localStorage.setItem('token',response.data.token);
 
-            const resp = await axios.get('http://localhost:3000/chat/all-chats',{headers:{Authorization : response.data.token}});
-
-            const chatArr =[];
-            const allChats = resp.data;
-            let n = allChats.length;
-            for(let i= n-5|0; i<n; i++){
-                chatArr.push(allChats[i]);
-            }
-            localStorage.setItem('chats',JSON.stringify(chatArr));
             window.location.href = "../chatapp/chat.html"
             
         }

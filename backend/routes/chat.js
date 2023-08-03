@@ -9,6 +9,4 @@ router.post('/message',authMiddleware.authenticate, chatController.chatPost);
 
 router.get('/all-chats', authMiddleware.authenticate, chatController.allChats)
 
-router.get('/all-user',authMiddleware.authenticate,chatController.getAllUser)
-
 module.exports = router;
